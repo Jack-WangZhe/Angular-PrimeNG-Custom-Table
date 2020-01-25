@@ -1,0 +1,35 @@
+div#dhrm-table {
+    ::ng-deep {
+        div.header-column-dropdown-wrapper {
+            display: flex;
+            flex-direction: row-reverse;
+            padding-bottom: 5px;
+        }
+
+        th.header-actions-wrapper {
+            width: 8vw;
+        }
+        td.body-actions-wrapper {
+            width: 8vw;
+            text-align: center;
+            span.body-action-item {
+                margin-right: 1vw;
+            }
+        }
+
+        div.table-paginator-wrapper {
+            p-paginator {
+                div.ui-paginator {
+                    text-align: right;
+                    height: 34px;
+
+                    div.ui-paginator-left-content {
+                        padding-left: 5px;
+                        line-height: 34px;
+                        color: #848484;
+                    }
+                }
+            }
+        }
+    }
+}

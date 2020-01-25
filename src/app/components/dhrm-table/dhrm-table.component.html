@@ -1,18 +1,57 @@
-<p-table [value]="cars">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Vin</th>
-            <th>Year</th>
-            <th>Brand</th>
-            <th>Color</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-car>
-        <tr>
-            <td>{{car.vin}}</td>
-            <td>{{car.year}}</td>
-            <td>{{car.brand}}</td>
-            <td>{{car.color}}</td>
-        </tr>
-    </ng-template>
-</p-table>
+<div id="dhrm-table">
+    <div class="header-column-dropdown-wrapper">
+        <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
+            selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" 
+            defaultLabel="Choose Columns"></p-multiSelect>
+    </div>
+    
+    <p-table [columns]="selectedColumns" [value]="items" scrollHeight="calc( 100vh - 450px )" 
+        [scrollable]="true" (sortFunction)="customSort($event)" [customSort]="true" sortMode="multiple" [multiSortMeta]="multiSortMeta">
+        <!-- display table header -->
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [title]="col.header" [pSortableColumn]="col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+                <th class="header-actions-wrapper" title="Actions" *ngIf="actions?.length">
+                    Actions
+                </th>
+            </tr>
+        </ng-template>
+
+        <!-- display table data -->
+        <ng-template *ngIf="items?.length" pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns" [title]="rowData[col.field]">
+                    {{rowData[col.field]}}
+                </td>
+                <td class="body-actions-wrapper" *ngIf="actions?.length">
+                    <span *ngFor="let action of actions" class="body-action-item" 
+                        (click)="onActionClick(action.type, rowData)" [title]="action.title">
+                        <i [class]="action.iconName"></i>
+                    </span>
+                </td>
+            </tr>
+        </ng-template>
+
+        <!-- display when none data -->
+        <ng-template *ngIf="!items?.length" pTemplate="summary">
+            None data found.
+        </ng-template>
+
+    </p-table>
+    <!-- table paginator wrapper -->
+    <div class="table-paginator-wrapper" *ngIf="items?.length">
+        <p-paginator #paginator [rows]="pageInfo?.pageSize" [totalRecords]="pageInfo?.totalCount"
+            [rowsPerPageOptions]="[10,20,50,100]" (onPageChange)="pageSizeChange($event)" [templateLeft]="totalCountTemplate"></p-paginator>
+        <ng-template #totalCountTemplate>
+            <div class="paginator-total-wrapper" *ngIf="(pageInfo?.pageIndex+1)*pageInfo?.pageSize<=pageInfo?.totalCount">
+                行号区间:{{pageInfo?.pageIndex*pageInfo?.pageSize+1}} - {{(pageInfo?.pageIndex+1)*pageInfo?.pageSize}}, 总行数:{{pageInfo?.totalCount}}
+            </div>
+            <div class="paginator-total-wrapper" *ngIf="(pageInfo?.pageIndex+1)*pageInfo?.pageSize>pageInfo?.otalCount">
+                行号区间:{{pageInfo?.pageIndex*pageInfo?.pageSize+1}} - {{pageInfo?.totalCount}}, 总行数:{{pageInfo?.totalCount}}
+            </div>
+        </ng-template>
+    </div>
+</div>
