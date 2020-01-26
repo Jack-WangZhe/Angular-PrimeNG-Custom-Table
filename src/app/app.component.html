@@ -1,1 +1,6 @@
-<dhrm-table></dhrm-table>
+<dhrm-table [defaultCols]="defaultCols" 
+            [variableCols]="variableCols"
+            [pageableItem]="pageableItem"
+            (onActionClick)="actionClickResolver($event)"
+            (onFilterChange)="filterChangeResolver($event)">
+</dhrm-table>
