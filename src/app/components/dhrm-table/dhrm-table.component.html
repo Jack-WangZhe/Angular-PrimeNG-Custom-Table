@@ -11,12 +11,12 @@
         <!-- display table header -->
         <ng-template pTemplate="header">
             <tr>
-                <th *ngFor="let col of defaultCols" [title]="col.header" [pSortableColumn]="col.field"
+                <th class="header-items-wrapper" *ngFor="let col of defaultCols" [title]="col.header" [pSortableColumn]="col.field"
                     [pSortableColumnDisabled]="col.order === -2">
                     {{col.header}}
                     <p-sortIcon *ngIf="col.order !== -2" [field]="col.field"></p-sortIcon>
                 </th>
-                <th *ngFor="let col of selectedColumns" [title]="col.header" [pSortableColumn]="col.field"
+                <th class="header-items-wrapper" *ngFor="let col of selectedColumns" [title]="col.header" [pSortableColumn]="col.field"
                     [pSortableColumnDisabled]="col.order === -2">
                     {{col.header}}
                     <p-sortIcon *ngIf="col.order !== -2" [field]="col.field"></p-sortIcon>
@@ -30,10 +30,10 @@
         <!-- display table data -->
         <ng-template *ngIf="pageableItem.data?.length" pTemplate="body" let-rowData>
             <tr>
-                <td *ngFor="let col of defaultCols" [title]="rowData[col.field]">
+                <td class="body-items-wrapper" *ngFor="let col of defaultCols" [title]="rowData[col.field]">
                     {{rowData[col.field]}}
                 </td>
-                <td *ngFor="let col of selectedColumns" [title]="rowData[col.field]">
+                <td class="body-items-wrapper" *ngFor="let col of selectedColumns" [title]="rowData[col.field]">
                     {{rowData[col.field]}}
                 </td>
                 <td class="body-actions-wrapper" *ngIf="actions?.length">

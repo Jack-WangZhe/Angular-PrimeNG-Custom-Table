@@ -6,10 +6,23 @@ div#dhrm-table {
             padding-bottom: 5px;
         }
 
+        .header-items-wrapper {
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            -o-text-overflow: ellipsis;
+            white-space:nowrap;
+        }
+
+        .body-items-wrapper {
+            @extend .header-items-wrapper;
+        }
+
         th.header-actions-wrapper {
+            @extend .header-items-wrapper;
             width: 110px;
         }
         td.body-actions-wrapper {
+            @extend .header-items-wrapper;
             width: 110px;
             text-align: center;
             span.body-action-item {
