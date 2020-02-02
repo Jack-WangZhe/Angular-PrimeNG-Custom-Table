@@ -6,23 +6,33 @@ div#dhrm-table {
             padding-bottom: 5px;
         }
 
-        .header-items-wrapper {
+        .no-wrap-text-style {
             overflow: hidden; 
             text-overflow: ellipsis; 
             -o-text-overflow: ellipsis;
             white-space:nowrap;
         }
 
+        .header-items-wrapper {
+            @extend .no-wrap-text-style;
+            background-color: #dae8ef;
+            color: #404c51;
+            border: 1px solid #c1d5df;
+        }
+
         .body-items-wrapper {
-            @extend .header-items-wrapper;
+            @extend .no-wrap-text-style;
         }
 
         th.header-actions-wrapper {
-            @extend .header-items-wrapper;
+            @extend .no-wrap-text-style;
             width: 110px;
+            background-color: #dae8ef;
+            color: #404c51;
+            border: 1px solid #c1d5df;
         }
         td.body-actions-wrapper {
-            @extend .header-items-wrapper;
+            @extend .no-wrap-text-style;
             width: 110px;
             text-align: center;
             span.body-action-item {
@@ -42,6 +52,16 @@ div#dhrm-table {
                         color: #848484;
                     }
                 }
+            }
+        }
+
+        // TODO: Override native colors
+        table.ui-table-scrollable-body-table {
+            .ui-table-tbody > tr {
+                background-color: #f3f6f9;
+            }
+            .ui-table-tbody > tr:nth-child(even) {
+                background-color: #fbfcfd;
             }
         }
     }
